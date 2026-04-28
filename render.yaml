@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: stocksales-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: node src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
