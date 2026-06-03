@@ -14,11 +14,11 @@ router.get('/summary/today', getTodaySummary);
 
 router.route('/')
   .get(getStockLogs)
-  .post(validate(stockLogCreateSchema), createStockLog);
+  .post(createStockLog);
 
 router.route('/:date')
   .get(getStockLogByDate)
-  .put(validate(stockLogUpdateSchema), updateStockLog)
+  .put(updateStockLog)
   .delete(deleteStockLog);
 
 export default router;
