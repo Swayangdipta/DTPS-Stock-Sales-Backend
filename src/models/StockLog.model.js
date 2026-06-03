@@ -50,11 +50,10 @@ const stockLogSchema = new mongoose.Schema(
 stockLogSchema.index({ date: 1 }, { unique: true });
 
 // Pre-save: recalculate totals automatically
-stockLogSchema.pre('save', function (next) {
+stockLogSchema.pre('save', async function () {
   this.totalRevenue   = this.soldItems.reduce((sum, i) => sum + i.subtotal,  0);
   this.totalItemsSold = this.soldItems.reduce((sum, i) => sum + i.quantity,  0);
   this.totalRestocked = this.restockedItems.reduce((sum, i) => sum + i.quantity, 0);
-  next();
 });
 
 export default mongoose.model('StockLog', stockLogSchema);

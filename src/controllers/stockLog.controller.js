@@ -106,19 +106,8 @@ export const createStockLog = async (req, res, next) => {
 
     res.status(201).json({ success: true, data: log });
   } catch (err) {
-    console.log('typeof next:', typeof next);
-    console.error(err);
-
     await session.abortTransaction();
-
-    if (typeof next === 'function') {
-      return next(err);
-    }
-
-    return res.status(500).json({
-      success: false,
-      message: err.message,
-    });
+    next(err);
   } finally {
     session.endSession();
   }
